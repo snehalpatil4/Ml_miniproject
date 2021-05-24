@@ -9,7 +9,7 @@ pca_x=pickle.load(open('pca_model.pkl','rb'))
 
 @app.route('/')
 def home():
-    return render_template('Home.HTML')
+    return render_template('home.HTML')
 
 @app.route('/predict',methods=['POST'])
 def predict():
