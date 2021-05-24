@@ -1,7 +1,6 @@
 from flask import Flask,render_template,request
 import numpy as np
-from sklearn.decomposition import PCA
-import pickle
+import pickle5 as pickle
 
 app = Flask(__name__)
 model = pickle.load(open('linear_regression.pkl', 'rb'))
