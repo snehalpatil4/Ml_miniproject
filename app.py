@@ -25,7 +25,7 @@ def predict():
     output = round(prediction[0], 5)
     print(output)
 
-    return render_template('home.html', prediction_text='Share will close on  INR {}'.format(output))
+    return render_template('home.HTML', prediction_text='Share will close on  INR {}'.format(output))
 
 
 if __name__ == "__main__":
