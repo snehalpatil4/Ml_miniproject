@@ -18,6 +18,19 @@
 
      <!-- Main Input For Receiving Query to our ML -->
     <form action="{{ url_for('predict')}}"method="post">
+		<select id="share" type="text" name="name">
+            <option value="None">Select a share</option>
+  		    <option value="HDFC">HDFC</option>
+  		    <option value="AxisBank">Axis Bank</option>
+            <option value="BajajAuto">Bajaj Auto</option>
+            <option value="Britania">Britania</option>
+            <option value="ICICIBank">ICICI Bank</option>
+            <option value="KotakBank">Kotak Bank</option>
+            <option value="Reliance">Reliance</option>
+            <option value="Titan">Titan</option>
+            <option value="Wipro">Wipro</option>
+            <option value="Maruti">Maruti</option>
+	    </select>
     	<input type="text" name="pclose" placeholder="Previous Close" required="required" />
         <input type="text" name="Open" placeholder="Open" required="required" />
 	<input type="text" name="High" placeholder="High" required="required" />

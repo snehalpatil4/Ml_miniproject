@@ -3,9 +3,9 @@ import numpy as np
 import pickle5 as pickle
 
 app = Flask(__name__)
-model = pickle.load(open('linear_regression.pkl', 'rb'))
-scaler=pickle.load(open('scaler.pkl','rb'))
-pca_x=pickle.load(open('pca_model.pkl','rb'))
+model = pickle.load(open('model/linear_regression.pkl', 'rb'))
+scaler = pickle.load(open('scaler.pkl','rb'))
+pca_x = pickle.load(open('pca_model.pkl','rb'))
 
 @app.route('/')
 def home():
@@ -13,17 +13,92 @@ def home():
 
 @app.route('/predict',methods=['POST'])
 def predict():
-    int_features = [float(x) for x in request.form.values()]
+    features = [x for x in request.form.values()]
+    print(features)
+    if(features[0] == "None"):
+        return render_template('home.HTML', prediction_text='Please select a share.')
+
+    name = features[0]
+    feat = features[1:]
+    int_features = [float(x) for x in feat]
     final_features = [np.array(int_features)]
     print(final_features)
-    scaled_data=scaler.transform(final_features)
+
+    scaled_data = scaler.transform(final_features)
     print(scaled_data)
     x_pca = pca_x.transform(scaled_data)
     print(x_pca)
-    prediction = model.predict(x_pca)
-    print(prediction)
-    output = round(prediction[0], 5)
-    print(output)
+
+    output = 0.0
+    if (name == "HDFC"):
+        print("HDFC")
+        model = pickle.load(open('model/linear_regression.pkl', 'rb'))
+        prediction = model.predict(x_pca)
+        print(prediction)
+        output = round(prediction[0], 5)
+
+    elif (name == "AxisBank"):
+        print("Axis")
+        model = pickle.load(open('model/Axixbank.pkl', 'rb'))
+        prediction = model.predict(x_pca)
+        print(prediction)
+        output = round(prediction[0], 5)
+
+    elif (name == "BajajAuto"):
+        print("BajajAuto")
+        model = pickle.load(open('model/Bajaj-auto.pkl', 'rb'))
+        prediction = model.predict(x_pca)
+        print(prediction)
+        output = round(prediction[0], 5)
+
+    elif (name == "Britania"):
+        print("Britania")
+        model = pickle.load(open('model/Britannia.pkl', 'rb'))
+        prediction = model.predict(x_pca)
+        print(prediction)
+        output = round(prediction[0], 5)
+
+    elif (name == "ICICIBank"):
+        print("ICICIBank")
+        model = pickle.load(open('model/ICICI.pkl', 'rb'))
+        prediction = model.predict(x_pca)
+        print(prediction)
+        output = round(prediction[0], 5)
+
+    elif (name == "KotakBank"):
+        print("KotakBank")
+        model = pickle.load(open('model/Kotakbank.pkl', 'rb'))
+        prediction = model.predict(x_pca)
+        print(prediction)
+        output = round(prediction[0], 5)
+
+    elif (name == "Reliance"):
+        print("Reliance")
+        model = pickle.load(open('model/Reliance.pkl', 'rb'))
+        prediction = model.predict(x_pca)
+        print(prediction)
+        output = round(prediction[0], 5)
+
+    elif (name == "Titan"):
+        print("Titan")
+        model = pickle.load(open('model/Titan.pkl', 'rb'))
+        prediction = model.predict(x_pca)
+        print(prediction)
+        output = round(prediction[0], 5)
+
+    elif (name == "Wipro"):
+        print("Wipro")
+        model = pickle.load(open('model/Wipro.pkl', 'rb'))
+        prediction = model.predict(x_pca)
+        print(prediction)
+        output = round(prediction[0], 5)
+
+    elif (name == "Maruti"):
+        print("Maruti")
+        model = pickle.load(open('model/Maruti.pkl', 'rb'))
+        prediction = model.predict(x_pca)
+        print(prediction)
+        output = round(prediction[0], 5)
 
     return render_template('home.HTML', prediction_text='Share will close on  INR {}'.format(output))
 
